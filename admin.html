@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | 31blume</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+
+    <style>
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1rem;
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            padding: 1.5rem;
+            border-radius: 4px;
+            text-align: center;
+            border: 1px solid var(--color-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .booking-list {
+            margin-top: 2rem;
+        }
+
+        .booking-item {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            background: #333;
+            color: #ccc;
+            text-transform: uppercase;
+        }
+
+        .badge-confirmed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        /* Login Overlay */
+        #login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-bg);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-site-banner">
+        This is a test website. Visit <a href="https://31blume.com/31blume-1">31blume.com</a> for the real site.
+    </div>
+
+
+    <!-- Simple Auth Protection -->
+    <div id="login-overlay">
+        <div class="card" style="max-width: 400px; width: 90%;">
+            <h2 class="text-center">Admin Access</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="admin-password" class="form-input" placeholder="Enter password">
+                </div>
+                <!-- Hint for User -->
+                <p style="font-size: 0.8rem; color: #999; text-align: center; margin-bottom: 1rem;">(Hint: "ryan")</p>
+                <button type="submit" class="btn btn-block">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="navbar container">
+        <a href="index.html" class="logo">
+            <img src="assets/images/logo.png" alt="31blume Logo">
+            <span style="margin-left: 1rem; font-size: 1rem; color: var(--color-text-light);">Admin</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">View Site</a>
+            <a href="#" class="nav-link" id="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="section container">
+        <div class="dashboard-header">
+            <h1>Dashboard</h1>
+            <div class="tab-controls">
+                <button class="btn btn-small" onclick="showTab('bookings')" id="tab-bookings">Bookings</button>
+                <button class="btn btn-small btn-outline" onclick="showTab('settings')"
+                    id="tab-settings">Availability</button>
+            </div>
+        </div>
+
+        <!-- Bookings Tab -->
+        <div id="view-bookings">
+            <div class="grid"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                <div class="stat-card">
+                    <div class="stat-value" id="total-bookings">0</div>
+                    <div>Upcoming Bookings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="total-revenue">$0</div>
+                    <div>Estimated Revenue</div>
+                </div>
+            </div>
+
+            <h3>Upcoming Sessions</h3>
+            <div id="booking-list" class="booking-list">
+                <!-- JS populated -->
+                <p class="text-center" style="color: #999;">No bookings found.</p>
+            </div>
+        </div>
+
+        <!-- Availability Settings Tab -->
+        <div id="view-settings" class="hidden">
+            <div style="max-width: 600px;">
+                <h3>Manage Availability</h3>
+
+                <form id="settings-form">
+                    <div class="card" style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 1rem;">Working Days</h4>
+                        <div class="form-group flex" style="gap: 1rem; flex-wrap: wrap;">
+                            <label><input type="checkbox" name="day" value="0"> Sun</label>
+                            <label><input type="checkbox" name="day" value="1"> Mon</label>
+                            <label><input type="checkbox" name="day" value="2"> Tue</label>
+                            <label><input type="checkbox" name="day" value="3"> Wed</label>
+                            <label><input type="checkbox" name="day" value="4"> Thu</label>
+                            <label><input type="checkbox" name="day" value="5"> Fri</label>
+                            <label><input type="checkbox" name="day" value="6"> Sat</label>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 1rem;">Hours</h4>
+                        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Start Hour (24h)</label>
+                                <input type="number" id="hours-start" class="form-input" min="0" max="23">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">End Hour (24h)</label>
+                                <input type="number" id="hours-end" class="form-input" min="0" max="23">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 1rem;">Blocked Dates (YYYY-MM-DD)</h4>
+                        <div class="form-group">
+                            <textarea id="blocked-dates" class="form-textarea" rows="4"
+                                placeholder="2026-12-25, 2026-01-01 (comma separated)"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Save Changes</button>
+                    <span id="save-msg"
+                        style="margin-left: 1rem; color: var(--color-success); opacity: 0; transition: opacity 0.5s;">Saved!</span>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/admin.js"></script>
+</body>
+
+</html>

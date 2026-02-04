@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | 31blume</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+</head>
+
+<body>
+    <div class="test-site-banner">
+        This is a test website. Visit <a href="https://31blume.com/31blume-1">31blume.com</a> for the real site.
+    </div>
+
+
+    <!-- Nav -->
+    <nav class="navbar container">
+        <a href="index.html" class="logo">
+            <img src="assets/images/logo.png" alt="31blume Logo">
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar">☰ Menu</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Work</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="book.html" class="nav-link">Book</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <main class="section container" style="max-width: 600px;">
+        <h1 class="text-center">Get in Touch</h1>
+        <p class="text-center" style="margin-bottom: 3rem;">For branding, weddings, or any questions.</p>
+
+        <form>
+            <div class="form-group">
+                <label class="form-label" for="name">Name</label>
+                <input type="text" id="name" class="form-input" placeholder="Your Name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" class="form-input" placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="inquiry">Inquiry Type</label>
+                <select id="inquiry" class="form-select">
+                    <option>General Question</option>
+                    <option>Wedding Inquiry</option>
+                    <option>Branding/Business</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="message">Message</label>
+                <textarea id="message" class="form-textarea" rows="5"
+                    placeholder="Tell me about your vision..."></textarea>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <button type="submit" class="btn btn-block">Send Message</button>
+            </div>
+
+            <!-- Placeholder for functional logic -->
+            <p style="margin-top: 1rem; font-size: 0.8rem; text-align: center; color: var(--color-text-light);">
+                * This form is a demo placeholder.
+            </p>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer container text-center">
+        <p>&copy; 2026 31blume Photography. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

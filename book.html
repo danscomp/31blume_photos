@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Session | 31blume</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+
+    <style>
+        /* Calendar Styles */
+        .calendar-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            text-align: center;
+        }
+
+        .calendar-day-header {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            padding-bottom: 8px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .calendar-day:hover:not(.disabled) {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+        }
+
+        .calendar-day.selected {
+            background-color: var(--color-text);
+            color: white;
+        }
+
+        .calendar-day.disabled {
+            color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.today {
+            border: 1px solid var(--color-text);
+        }
+
+        /* Time Slots */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .time-slot {
+            padding: 8px;
+            border: 1px solid var(--color-border);
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+
+        .time-slot.selected {
+            background-color: var(--color-text);
+            color: white;
+            border-color: var(--color-text);
+        }
+
+        .time-slot:hover:not(.selected) {
+            background-color: var(--color-surface);
+        }
+
+        /* Wizard Logic */
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeUp 0.4s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-site-banner">
+        This is a test website. Visit <a href="https://31blume.com/31blume-1">31blume.com</a> for the real site.
+    </div>
+
+
+    <!-- Nav -->
+    <nav class="navbar container">
+        <a href="index.html" class="logo">
+            <img src="assets/images/logo.png" alt="31blume Logo">
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar">☰ Menu</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Work</a>
+            <a href="pricing.html" class="nav-link">Pricing</a>
+            <a href="book.html" class="nav-link">Book</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <main class="section container" style="max-width: 800px;">
+        <h1 class="text-center">Book a Session</h1>
+
+        <div id="booking-app">
+
+            <!-- Step 1: Session Type -->
+            <div id="step-1" class="step active">
+                <h3 class="text-center" style="margin-bottom: 2rem;">Select Session Type</h3>
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+
+                    <div class="card" onclick="selectSession('mini')"
+                        style="cursor: pointer; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
+                        <div class="card-header">
+                            <h3>Mini Session</h3>
+                            <div class="card-price">$175</div>
+                        </div>
+                        <div class="card-body">
+                            <p>30 minutes • 15+ images</p>
+                            <button class="btn btn-block btn-outline" style="margin-top: 1rem;">Select</button>
+                        </div>
+                    </div>
+
+                    <div class="card" onclick="selectSession('full')"
+                        style="cursor: pointer; transition: transform 0.2s;"
+                        onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='none'">
+                        <div class="card-header">
+                            <h3>Full Session</h3>
+                            <div class="card-price">$250</div>
+                        </div>
+                        <div class="card-body">
+                            <p>60 minutes • 30+ images</p>
+                            <button class="btn btn-block btn-outline" style="margin-top: 1rem;">Select</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Step 2: Date & Time -->
+            <div id="step-2" class="step">
+                <div style="margin-bottom: 2rem;">
+                    <button class="btn-small btn-outline" onclick="goToStep(1)">← Back</button>
+                </div>
+
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+                    <div>
+                        <h3 class="text-center">Select Date</h3>
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <button class="btn-small btn-outline" id="prev-month">&lt;</button>
+                                <span id="current-month" style="font-weight: 600;">August 2026</span>
+                                <button class="btn-small btn-outline" id="next-month">&gt;</button>
+                            </div>
+                            <div class="calendar-grid" id="calendar-grid">
+                                <!-- JS Injected -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-center">Select Time</h3>
+                        <div id="time-slots-container" class="time-slots">
+                            <p class="text-center" style="grid-column: 1/-1; color: var(--color-text-light);">Select a
+                                date to see available times.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Details -->
+            <div id="step-3" class="step">
+                <div style="margin-bottom: 2rem;">
+                    <button class="btn-small btn-outline" onclick="goToStep(2)">← Back</button>
+                </div>
+
+                <div style="max-width: 500px; margin: 0 auto;">
+                    <h3 class="text-center">Your Details</h3>
+                    <div class="card"
+                        style="background: var(--color-surface); margin-bottom: 2rem; border: 1px solid var(--color-border);">
+                        <p><strong>Session:</strong> <span id="summary-type">Mini Session</span></p>
+                        <p><strong>Date:</strong> <span id="summary-date">October 12, 2026</span></p>
+                        <p><strong>Time:</strong> <span id="summary-time">10:00 AM</span></p>
+                        <p><strong>Price:</strong> <span id="summary-price">$175</span></p>
+                    </div>
+
+                    <form id="booking-form" onsubmit="handleBookingSubmit(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="client-name">Full Name</label>
+                            <input type="text" id="client-name" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="client-email">Email Address</label>
+                            <input type="email" id="client-email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="client-phone">Phone Number</label>
+                            <input type="tel" id="client-phone" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="client-notes">Notes (Optional)</label>
+                            <textarea id="client-notes" class="form-textarea" rows="3"></textarea>
+                        </div>
+
+                        <div
+                            style="background: rgba(212, 163, 115, 0.1); border: 1px solid var(--color-accent); color: var(--color-text); padding: 1rem; border-radius: 4px; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                            <strong>Note:</strong> A 50% deposit will be required to confirm this booking.
+                        </div>
+
+                        <button type="submit" class="btn btn-block">Confirm Booking</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Step 4: Success -->
+            <div id="step-4" class="step">
+                <div class="text-center" style="max-width: 600px; margin: 0 auto; padding: 3rem 0;">
+                    <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1rem;">✓</div>
+                    <h2>Booking Requested!</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 2rem;">Thank you, <span id="success-name">Client</span>.
+                        We have received your booking request.</p>
+                    <p>A confirmation email has been sent to <strong id="success-email">email@example.com</strong> with
+                        payment details for the deposit.</p>
+
+                    <div style="margin-top: 3rem;">
+                        <a href="index.html" class="btn btn-outline">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer container text-center">
+        <p>&copy; 2026 31blume Photography. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/booking.js"></script> <!-- Core Booking Logic -->
+</body>
+
+</html>
