@@ -313,11 +313,13 @@
 
 @media (max-width: 768px) {
     .hero-content {
-        transform: translateY(-35vh);
+        /* Reset container position so p and button stay centered */
     }
 
     .hero-content h1 {
         color: #212121;
+        position: relative;
+        top: -18vh;
     }
 }
 
