@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | 31blume</title>
+    <title>Gallery | 31blume</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,6 @@
         This is a test website. Visit <a href="https://31blume.com/31blume-1">31blume.com</a> for the real site.
     </div>
 
-
     <!-- Nav -->
     <nav class="navbar container">
         <a href="index.html" class="logo">
@@ -40,46 +39,16 @@
         </div>
     </nav>
 
-    <main class="section container" style="max-width: 600px;">
-        <h1 class="text-center">Get in Touch</h1>
-        <p class="text-center" style="margin-bottom: 3rem;">For branding, weddings, or any questions.</p>
+    <main class="section container">
+        <div style="margin-bottom: 2rem;">
+            <a href="index.html" class="btn-small btn-outline">← Back to Albums</a>
+        </div>
 
-        <form>
-            <div class="form-group">
-                <label class="form-label" for="name">Name</label>
-                <input type="text" id="name" class="form-input" placeholder="Your Name">
-            </div>
+        <h1 class="text-center" style="margin-bottom: 3rem; text-transform: capitalize;" id="gallery-title">Gallery</h1>
 
-            <div class="form-group">
-                <label class="form-label" for="email">Email</label>
-                <input type="email" id="email" class="form-input" placeholder="your@email.com">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" for="inquiry">Inquiry Type</label>
-                <select id="inquiry" class="form-select">
-                    <option>General Question</option>
-                    <option>Wedding Inquiry</option>
-                    <option>Branding/Business</option>
-                    <option>Other</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label" for="message">Message</label>
-                <textarea id="message" class="form-textarea" rows="5"
-                    placeholder="Tell me about your vision..."></textarea>
-            </div>
-
-            <div style="margin-top: 2rem;">
-                <button type="submit" class="btn btn-block">Send Message</button>
-            </div>
-
-            <!-- Placeholder for functional logic -->
-            <p style="margin-top: 1rem; font-size: 0.8rem; text-align: center; color: var(--color-text-light);">
-                * This form is a demo placeholder.
-            </p>
-        </form>
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- JS populated -->
+        </div>
     </main>
 
     <!-- Footer -->
@@ -92,7 +61,34 @@
     </footer>
 
     <!-- Scripts -->
+    <script src="assets/js/gallery_data.js"></script> <!-- Generated Manifest -->
     <script src="assets/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const album = urlParams.get('album');
+
+            if (album && GALLERY_DATA && GALLERY_DATA[album]) {
+                document.getElementById('gallery-title').textContent = album;
+
+                const grid = document.getElementById('gallery-grid');
+                const images = GALLERY_DATA[album];
+
+                images.forEach(img => {
+                    const div = document.createElement('div');
+                    div.className = 'gallery-item';
+                    div.innerHTML = `<img src="assets/images/gallery/${album}/${img}" alt="${album}" loading="lazy">`;
+                    grid.appendChild(div);
+                });
+
+                // Re-init lightbox if needed
+                if (typeof createLightbox === 'function') createLightbox();
+
+            } else {
+                document.getElementById('gallery-grid').innerHTML = '<p class="text-center">Album not found.</p>';
+            }
+        });
+    </script>
 </body>
 
 </html>

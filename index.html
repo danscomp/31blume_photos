@@ -38,15 +38,14 @@
             <a href="pricing.html" class="nav-link">Pricing</a>
             <a href="book.html" class="nav-link">Book</a>
             <a href="contact.html" class="nav-link">Contact</a>
-            <!-- Admin Link for Demo/Ryan -->
-            <a href="admin.html" class="nav-link" style="opacity: 0.5; font-size: 0.8rem;">Admin</a>
         </div>
     </nav>
 
     <!-- Hero -->
     <header class="hero">
         <div class="hero-bg">
-            <img src="assets/images/gallery/0L7A4565.jpg" alt="Hero Background">
+            <!-- Using updated hero image -->
+            <img src="assets/images/hero_main.jpg" alt="Hero Background">
         </div>
         <div class="hero-content">
             <h1>Capturing Moments</h1>
@@ -56,23 +55,51 @@
         </div>
     </header>
 
-    <!-- Gallery -->
+    <!-- Gallery Albums -->
     <main class="section container">
         <h2 class="text-center" style="margin-bottom: 3rem;">Selected Work</h2>
         <div class="gallery-grid">
-            <!-- Filling with downloaded images -->
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4413.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4438.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4450.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4454.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4456.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4463.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4487.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4507.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4508.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4510.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4535.jpg" alt="Gallery Image"></div>
-            <div class="gallery-item"><img src="assets/images/gallery/0L7A4556.jpg" alt="Gallery Image"></div>
+
+            <!-- Branding Album -->
+            <div class="gallery-item" onclick="window.location.href='gallery.html?album=branding'">
+                <img src="assets/images/gallery/branding/0L7A4413.jpg" alt="Branding">
+                <div
+                    style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; text-align: center;">
+                    <h3 style="margin: 0; font-size: 1.5rem;">Branding</h3>
+                </div>
+            </div>
+
+            <!-- Weddings Album -->
+            <div class="gallery-item" onclick="window.location.href='gallery.html?album=weddings'">
+                <!-- Placeholder image until we know specific filenames, using first available usually -->
+                <img src="assets/images/gallery/weddings/0c154f50-9e9d-490b-8548-7d1009b2843e_rw_600.jpg" alt="Weddings"
+                    onerror="this.src='assets/images/logo.png'">
+                <div
+                    style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; text-align: center;">
+                    <h3 style="margin: 0; font-size: 1.5rem;">Weddings</h3>
+                </div>
+            </div>
+
+            <!-- Couples Album -->
+            <div class="gallery-item" onclick="window.location.href='gallery.html?album=couples'">
+                <img src="assets/images/gallery/couples/0021a605-d9b8-471a-aba7-40b74a34073c_rw_600.jpg" alt="Couples"
+                    onerror="this.src='assets/images/logo.png'">
+                <div
+                    style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; text-align: center;">
+                    <h3 style="margin: 0; font-size: 1.5rem;">Couples</h3>
+                </div>
+            </div>
+
+            <!-- Gym Album -->
+            <div class="gallery-item" onclick="window.location.href='gallery.html?album=gym'">
+                <img src="assets/images/gallery/gym/14613c64-f1db-4e85-a0b9-49c2de34022c_rw_600.jpg" alt="Gym"
+                    onerror="this.src='assets/images/logo.png'">
+                <div
+                    style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; text-align: center;">
+                    <h3 style="margin: 0; font-size: 1.5rem;">Gym</h3>
+                </div>
+            </div>
+
         </div>
         <br>
         <div class="text-center" style="margin-top: 2rem;">
@@ -83,6 +110,10 @@
     <!-- Footer -->
     <footer class="footer container text-center">
         <p>&copy; 2026 31blume Photography. All rights reserved.</p>
+        <div style="margin-top: 1rem;">
+            <a href="admin.html"
+                style="color: var(--color-text-light); text-decoration: none; font-size: 0.8rem; opacity: 0.5;">Admin</a>
+        </div>
     </footer>
 
     <!-- Scripts -->
