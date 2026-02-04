@@ -299,6 +299,39 @@
     animation: fadeInName 1.2s ease forwards 0.5s;
 }
 
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #f0f0f0;
+}
+
+.hero-btn {
+    color: white;
+    border-color: white;
+    padding: 15px 30px;
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        transform: translateY(-20vh);
+    }
+
+    .hero-content h1,
+    .hero-subtitle {
+        color: #212121;
+    }
+
+    .hero-btn {
+        color: #212121;
+        border-color: #212121;
+    }
+
+    .hero-btn:hover {
+        background-color: #212121;
+        color: white;
+    }
+}
+
 @keyframes fadeInName {
     from {
         opacity: 0;
@@ -356,10 +389,12 @@
         opacity: 1;
     }
 }
+
 /* Test Site Banner */
 .test-site-banner {
     background-color: var(--color-accent);
-    color: #1a1a1a; /* Enforce dark text for contrast on gold/accent */
+    color: #1a1a1a;
+    /* Enforce dark text for contrast on gold/accent */
     text-align: center;
     padding: 8px;
     font-size: 0.9rem;
@@ -373,4 +408,3 @@
     text-decoration: underline;
     font-weight: 700;
 }
-
