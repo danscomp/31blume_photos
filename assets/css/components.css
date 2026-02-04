@@ -313,22 +313,11 @@
 
 @media (max-width: 768px) {
     .hero-content {
-        transform: translateY(-20vh);
+        transform: translateY(-35vh);
     }
 
-    .hero-content h1,
-    .hero-subtitle {
+    .hero-content h1 {
         color: #212121;
-    }
-
-    .hero-btn {
-        color: #212121;
-        border-color: #212121;
-    }
-
-    .hero-btn:hover {
-        background-color: #212121;
-        color: white;
     }
 }
 
