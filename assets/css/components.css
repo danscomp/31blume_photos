@@ -386,8 +386,8 @@
 
 /* Test Site Banner */
 .test-site-banner {
-    background-color: var(--color-accent);
-    color: #1a1a1a;
+    background-color: rgba(33, 33, 33, 0.95);
+    color: var(--color-accent);
     /* Enforce dark text for contrast on gold/accent */
     text-align: center;
     padding: 8px;
@@ -398,7 +398,7 @@
 }
 
 .test-site-banner a {
-    color: #1a1a1a;
+    color: var(--color-accent);
     text-decoration: underline;
     font-weight: 700;
 }
